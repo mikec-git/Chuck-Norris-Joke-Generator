@@ -11,10 +11,12 @@ function getJokes(e){
         if(this.status === 200){
             const response = JSON.parse(this.responseText);
             let list = '';
-            if(response.type === 'success'){
+            if(response.type === 'success' && response.value.length > 1){
                 response.value.forEach(function(joke){
                     list += `<li>${joke.joke}</li>`;
                 });
+            } else if(response.value.joke !== null){
+                list = `<li>${response.value.joke}</li>`;
             } else{
                 list = '<li>Something went wrong</li>';    
             }      
